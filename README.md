@@ -1,3 +1,33 @@
+# Coolify Code Reading — 実務Laravelコードの学習記録
+
+coolLabs が公開しているセルフホスト PaaS [Coolify](https://github.com/coollabsio/coolify) を題材に、
+**管理画面と API からサーバー・アプリを操作する、本番で動いているLaravelコードの書き方・考え方**を学ぶためのフォークです。
+
+> ⚠️ 本リポジトリは学習目的のフォークです。原著作権は coolLabs に帰属し、
+> Apache License 2.0 に従います。アプリケーションのコードは変更しておらず、サービスとしての提供も行いません。
+
+## 📒 学習ノート → [docs/study/](docs/study/README.md)
+
+管理画面・API設計・セキュリティ・リファクタリングの観点で実務コードを分析し、該当コードへのリンク付きでまとめています。
+
+| # | ノート | 内容 |
+|---|--------|------|
+| 0 | [アプリの全体像](docs/study/00-app-overview.md) | Coolify とは、データ構造、規模感 |
+| 1 | [設計](docs/study/01-architecture.md) | Livewire / Action / Job / Service の役割分担、管理画面と API が同じ Action を呼ぶ構造 |
+| 2 | [管理画面](docs/study/02-control-panel.md) | Livewire の仕組み、画面の出し分けと操作時の権限確認 |
+| 3 | [API 設計](docs/study/03-api-design.md) | `/api/v1` と UUID、公開 API を壊さない工夫、トークンの権限 |
+| 4 | [セキュリティ](docs/study/04-security.md) | チームでのデータ分離、Role と Policy、他チームを使った権限テスト |
+| 5 | [リファクタリング](docs/study/05-refactoring.md) | Conventional Commits、互換性を保った ID の移行 |
+
+## 主な学び（抜粋）
+- **管理画面と API が、同じ Action を呼ぶ**：入口が増えても処理の本体は1か所なので、修正が全入口に効く（[詳細](docs/study/01-architecture.md)）
+- **公開した API は「約束」**：GET から POST に変えた操作は、古い呼び方に「POSTに変わりました」と `405` で教える（[詳細](docs/study/03-api-design.md)）
+- **権限は検索の時点で絞り、さらに Policy でも確かめる**：他チームの UUID を指定しても 404 になり、「他人のデータが見えない」ことをテストで守っている（[詳細](docs/study/04-security.md)）
+
+---
+
+*以下はフォーク元（coollabsio/coolify）のオリジナル README です。*
+
 <div align="center">
 
 <img src="./public/coolify-logo.svg" alt="Coolify logo" width="120" />
